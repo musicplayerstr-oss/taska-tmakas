@@ -8,6 +8,34 @@ const [userChoice, setUserChoice] = useState(null);
 const [computerChoice, setComputerChoice] = useState(null);
 const [result, setResult] = useState(null);
 
+const handleUserChoice = (userChoice) => {
+  setUserChoice(userChoice);
+  
+  const computerChoice = randomComputerChoice();
+  setComputerChoice(computerChoice);
+
+  determineWinner(userChoice, computerChoice);
+};
+
+const randomComputerChoice = () => {
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  const computerChoice = choices[randomIndex];
+  return computerChoice;
+};
+
+const determineWinner = (user, computer) => {
+  if (user.name === computer.name) {
+    setResult('Berabere');
+  } else if (
+    (user.name === 'Taş' && computer.name === 'Makas') ||
+    (user.name === 'Kağıt' && computer.name === 'Taş') ||
+    (user.name === 'Makas' && computer.name === 'Kağıt')
+  ) {
+    setResult('Kullanıcı Kazandı');
+  } else {
+    setResult('Bilgisayar Kazandı');
+  }
+};
   return (
    <SafeAreaView style={styles.container}>
       <View style={styles.container} />
